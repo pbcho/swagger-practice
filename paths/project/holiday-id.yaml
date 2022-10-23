@@ -1,0 +1,14 @@
+delete:
+  summary: カレンダー休日を1件削除
+  description: カレンダー休日を1件削除
+  tags:
+    - project
+  parameters:
+    - $ref: "#/components/parameters/holidayDate"
+  responses:
+    "204":
+      description: OK
+    "401":
+      $ref: "#/components/responses/Unauthorized"
+    "404":
+      $ref: "#/components/responses/NotFound"

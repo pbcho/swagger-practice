@@ -1,0 +1,18 @@
+post:
+  summary: ログイン認証する
+  description: ユーザーのログイン認証
+  tags:
+    - user
+  requestBody:
+    $ref: "#/components/requestBodies/loginUserId"
+  responses:
+    '201':
+      description: "認証結果を返す"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthResponse"
+    '400':
+      $ref: '#/components/responses/BadRequest'
+    '401':
+      $ref: '#/components/responses/Unauthorized'

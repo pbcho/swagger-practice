@@ -1,0 +1,37 @@
+get:
+  summary: プロジェクト情報を１件取得
+  description: プロジェクト検索
+  tags:
+    - project
+  parameters:
+    - $ref: "#/components/parameters/projectId"
+  responses:
+    '200':
+      description: "プロジェクト情報を1件、JSONで返す"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Project"
+    '401':
+      $ref: '#/components/responses/Unauthorized'
+    '404':
+      $ref: '#/components/responses/NotFound'
+
+put:
+  summary: プロジェクト情報を１件更新
+  description: プロジェクト更新。
+  tags:
+    - project
+  parameters:
+    - $ref: "#/components/parameters/projectId"
+  requestBody:
+    $ref: "#/components/requestBodies/updateProject"
+  responses:
+    '204':
+      description: "OK"
+    '400':
+      $ref: '#/components/responses/BadRequest'
+    '401':
+      $ref: '#/components/responses/Unauthorized'
+    '404':
+      $ref: '#/components/responses/NotFound'

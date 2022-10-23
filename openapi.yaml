@@ -1,0 +1,733 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: OpenAPI勉強会
+  description: OpenAPI勉強会である。
+  license:
+    name: ライセンス
+paths:
+  /auth:
+    post:
+      summary: ログイン認証する
+      description: ユーザーのログイン認証
+      tags:
+        - user
+      requestBody:
+        $ref: '#/components/requestBodies/loginUserId'
+      responses:
+        '201':
+          description: 認証結果を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user:
+    get:
+      summary: ユーザー情報を全件取得
+      description: ユーザー情報を検索
+      tags:
+        - user
+      responses:
+        '200':
+          description: ユーザー情報を配列にして、JSONで返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserItems'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: ユーザー情報を１件登録
+      description: ユーザーを登録　※会社コードを登録
+      tags:
+        - user
+      requestBody:
+        $ref: '#/components/requestBodies/createUser'
+      responses:
+        '201':
+          description: ユーザー情報を1件、JSONで返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  '/user/{userId}':
+    get:
+      summary: ユーザー情報を１件取得
+      description: ユーザー情報を検索
+      tags:
+        - user
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: ユーザー情報を1件、JSONで返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: ユーザー情報を１件更新
+      description: ユーザー情報を更新
+      tags:
+        - user
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      requestBody:
+        $ref: '#/components/requestBodies/updateUser'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: ユーザー情報を１件削除
+      description: ユーザー情報を削除
+      tags:
+        - user
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '204':
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /holiday:
+    get:
+      summary: カレンダーの休日を全件取得
+      description: カレンダーの休日を検索
+      tags:
+        - project
+      responses:
+        '200':
+          description: カレンダーを配列にして、JSONで返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HolidayItems'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: カレンダー休日を複数件登録
+      description: カレンダーの休日複数件登録
+      tags:
+        - project
+      requestBody:
+        $ref: '#/components/requestBodies/createHoliday'
+      responses:
+        '201':
+          description: カレンダーをJSONで返す
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Holiday'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      summary: カレンダー休日を複数件更新
+      description: カレンダー休日を複数件更新
+      tags:
+        - project
+      parameters: null
+      requestBody:
+        $ref: '#/components/requestBodies/updateHoliday'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/NotFound'
+        '404':
+          $ref: '#/components/responses/Unauthorized'
+  '/holiday/{holidayDate}':
+    delete:
+      summary: カレンダー休日を1件削除
+      description: カレンダー休日を1件削除
+      tags:
+        - project
+      parameters:
+        - $ref: '#/components/parameters/holidayDate'
+      responses:
+        '204':
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /project:
+    get:
+      summary: プロジェクト情報を全件取得
+      description: プロジェクト検索
+      tags:
+        - project
+      responses:
+        '200':
+          description: プロジェクト情報を配列にして、JSONで返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectItems'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: プロジェクト情報を１件登録
+      description: プロジェクト登録。
+      tags:
+        - project
+      requestBody:
+        $ref: '#/components/requestBodies/createProject'
+      responses:
+        '201':
+          description: プロジェクト登録情報をJSONで返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  '/project/{projectId}':
+    get:
+      summary: プロジェクト情報を１件取得
+      description: プロジェクト検索
+      tags:
+        - project
+      parameters:
+        - $ref: '#/components/parameters/projectId'
+      responses:
+        '200':
+          description: プロジェクト情報を1件、JSONで返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: プロジェクト情報を１件更新
+      description: プロジェクト更新。
+      tags:
+        - project
+      parameters:
+        - $ref: '#/components/parameters/projectId'
+      requestBody:
+        $ref: '#/components/requestBodies/updateProject'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    userId:
+      in: path
+      name: userId
+      required: true
+      schema:
+        type: string
+        example: pbuser
+      description: ユーザーの一意識別子
+    projectId:
+      in: path
+      name: projectId
+      required: true
+      schema:
+        type: string
+        example: project001
+      description: プロジェクトの一意識別子
+    holidayDate:
+      in: path
+      name: holidayDate
+      required: true
+      schema:
+        type: string
+        format: date
+        example: '2021-07-07'
+      description: 休日日付の一意識別子
+  requestBodies:
+    loginUserId:
+      description: アクセストークン取得 Request Body
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthUserIdReq'
+    createUser:
+      description: ユーザ作成 Request Body
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserReq'
+    updateUser:
+      description: ユーザ更新 Request Body
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPut'
+    createProject:
+      description: プロジェクト作成 Request Body
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectReq'
+    updateProject:
+      description: プロジェクト変更 Request Body
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectPutReq'
+    createHoliday:
+      description: カレンダーの休日作成 Request Body
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/HolidayReq'
+    updateHoliday:
+      description: カレンダーの休日更新 Request Body
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/HolidayPutReq'
+  schemas:
+    BadRequestError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: A100
+        message:
+          type: string
+          example: リクエストパラメータが不正です。
+      required:
+        - errorCode
+        - message
+    NotFoundError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: A150
+        message:
+          type: string
+          example: XXXIDが見つかりませんでした。
+      required:
+        - errorCode
+        - message
+    NonAdminError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: A160
+        message:
+          type: string
+          example: 管理者権限がありません。
+      required:
+        - errorCode
+        - message
+    UnauthorizedError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: A170
+        message:
+          type: string
+          example: アクセストークンが不正です。
+      required:
+        - errorCode
+        - message
+    InternalServerError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          example: A200
+        message:
+          type: string
+          example: サーバで処理ができませんでした。
+      required:
+        - errorCode
+        - message
+    AuthResponse:
+      description: 認証 Response
+      type: object
+      required:
+        - idToken
+      properties:
+        id:
+          type: string
+          example: pbuser
+        userName:
+          type: string
+          example: 太郎
+        email:
+          type: string
+          example: pbuser@example.com
+        idToken:
+          type: string
+          example: >-
+            eyJhbGciOiJSUzI1NiIsImtpZCI6IjRlOWRmNWE0ZjI4YWQwMjUwNjRkNjY1NTNiY2I5YjMzOTY4NWVmOTQiLCJ0eXAiOiJKV1QifQ
+        registered:
+          type: boolean
+          example: true
+        refreshToken:
+          type: string
+          example: AGEhc0CP3FyqIGYzvXNV
+        expiresIn:
+          type: string
+          example: '3600'
+    AuthUserIdReq:
+      description: UserIdでログイン認証 Request
+      type: object
+      required:
+        - userId
+        - password
+      properties:
+        userId:
+          description: ユーザID
+          type: string
+          example: pbuser
+        password:
+          description: パスワード
+          type: string
+          example: password
+    UserItems:
+      type: object
+      properties:
+        items:
+          description: ユーザのデータリスト
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        count:
+          description: データのサイズ
+          type: integer
+          format: int32
+          example: 1
+    User:
+      description: ユーザ
+      type: object
+      required:
+        - userId
+        - userName
+      properties:
+        userId:
+          description: ユーザID
+          type: string
+          example: pbuser
+        userName:
+          description: ユーザ名
+          type: string
+          example: 太郎
+        email:
+          description: メールアドレス
+          type: string
+          example: pbuser@example.com
+    UserReq:
+      description: ユーザ
+      type: object
+      required:
+        - email
+        - userName
+      properties:
+        email:
+          description: メールアドレス
+          type: string
+          example: pbuser@example.com
+        userName:
+          description: ユーザ名
+          type: string
+          example: 太郎
+    UserPut:
+      description: ユーザ
+      type: object
+      required:
+        - userName
+        - email
+      properties:
+        userName:
+          description: ユーザ名
+          type: string
+          example: 太郎
+        email:
+          description: メールアドレス
+          type: string
+          example: pbuser@example.com
+    HolidayItems:
+      type: object
+      properties:
+        items:
+          description: カレンダーのデータリスト
+          type: array
+          items:
+            $ref: '#/components/schemas/Holiday'
+        count:
+          description: データのサイズ
+          type: integer
+          format: int32
+          example: 1
+    ProjectItems:
+      type: object
+      properties:
+        items:
+          description: プロジェクトのデータリスト
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        count:
+          description: データのサイズ
+          type: integer
+          format: int32
+          example: 1
+    Project:
+      description: プロジェクト
+      type: object
+      required:
+        - projectId
+        - projectName
+        - projectOperator
+        - projectStartDate
+        - projectEndDate
+        - updateAt
+      properties:
+        projectId:
+          description: プロジェクトID
+          type: string
+          example: project001
+        projectName:
+          description: プロジェクト名
+          type: string
+          example: 〇〇プロジェクト
+        projectOperator:
+          description: プロジェクト担当者
+          type: string
+          example: 太郎
+        projectStartDate:
+          description: 開始年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-04-01'
+        projectEndDate:
+          description: 終了年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-12-25'
+        updateAt:
+          description: 変更時間 (Epoch Time)
+          type: number
+          example: 1627516800000
+    ProjectReq:
+      description: プロジェクト
+      type: object
+      required:
+        - projectName
+        - projectOperator
+        - projectStartDate
+        - projectEndDate
+      properties:
+        projectName:
+          description: プロジェクト名
+          type: string
+          example: 〇〇プロジェクト
+        projectOperator:
+          description: プロジェクト担当者
+          type: string
+          example: 太郎
+        projectStartDate:
+          description: 開始年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-04-01'
+        projectEndDate:
+          description: 終了年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-12-25'
+    ProjectPutReq:
+      description: プロジェクト
+      type: object
+      required:
+        - projectName
+        - projectOperator
+        - projectStartDate
+        - projectEndDate
+        - updateAt
+      properties:
+        projectName:
+          description: プロジェクト名
+          type: string
+          example: 〇〇プロジェクト
+        projectOperator:
+          description: プロジェクト担当者
+          type: string
+          example: 太郎
+        projectStartDate:
+          description: 開始年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-04-01'
+        projectEndDate:
+          description: 終了年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-12-25'
+        updateAt:
+          description: 変更時間 (Epoch Time)
+          type: number
+          example: 1627516800000
+    Holiday:
+      description: カレンダー
+      type: object
+      required:
+        - holidayDate
+        - holidayName
+        - updateAt
+      properties:
+        holidayDate:
+          description: 年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-10-31'
+        holidayName:
+          description: 休日
+          type: string
+          example: 〇〇の日
+        updateAt:
+          description: 変更時間 (Epoch Time)
+          type: number
+          example: 1627516800000
+    HolidayReq:
+      description: カレンダー
+      type: object
+      required:
+        - holidayDate
+        - holidayName
+      properties:
+        holidayDate:
+          description: 年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-10-31'
+        holidayName:
+          description: 休日
+          type: string
+          example: 〇〇の日
+    HolidayPutReq:
+      description: カレンダー
+      type: object
+      required:
+        - holidayDate
+        - holidayName
+        - updateAt
+      properties:
+        holidayDate:
+          description: 年月日
+          type: string
+          format: date
+          pattern: YYYY-MM-DD
+          example: '2022-10-31'
+        holidayName:
+          description: 休日
+          type: string
+          example: 〇〇の日
+        updateAt:
+          description: 変更時間 (Epoch Time)
+          type: number
+          example: 1627516800000
+  responses:
+    BadRequest:
+      description: The specified resource was invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestError'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundError'
+    Unauthorized:
+      description: Unauthorized request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UnauthorizedError'
+    InternalServerError:
+      description: Unauthorized request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerError'
+  headers:
+    X-Request-ID:
+      description: リクエストID
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Credentials or access token for API
+security:
+  - Bearer: []
+servers:
+  - url: 'http://localhost:8003'
+    description: Local server(mock)
+  - url: 'https://xxx/api'
+    description: Staging server
+tags:
+  - name: user
+    description: ユーザー
+  - name: project
+    description: プロジェクト管理
+

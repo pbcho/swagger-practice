@@ -1,0 +1,33 @@
+get:
+  summary: ユーザー情報を全件取得
+  description: ユーザー情報を検索
+  tags:
+    - user
+  responses:
+    "200":
+      description: "ユーザー情報を配列にして、JSONで返す"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserItems"
+    "401":
+      $ref: "#/components/responses/Unauthorized"
+
+post:
+  summary: ユーザー情報を１件登録
+  description: ユーザーを登録　※会社コードを登録
+  tags:
+    - user
+  requestBody:
+    $ref: "#/components/requestBodies/createUser"
+  responses:
+    "201":
+      description: "ユーザー情報を1件、JSONで返す"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+    "400":
+      $ref: "#/components/responses/BadRequest"
+    "401":
+      $ref: "#/components/responses/Unauthorized"

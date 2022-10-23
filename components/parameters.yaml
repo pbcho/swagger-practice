@@ -1,0 +1,29 @@
+##### user #####
+userId:
+  in: path
+  name: userId
+  required: true
+  schema:
+    type: string
+    example: "pbuser"
+  description: ユーザーの一意識別子
+
+##### project #####
+projectId:
+  in: path
+  name: projectId
+  required: true
+  schema:
+    type: string
+    example: "project001"
+  description: プロジェクトの一意識別子
+
+holidayDate:
+  in: path
+  name: holidayDate
+  required: true
+  schema:
+    type: string
+    format: date
+    example: "2021-07-07"
+  description: 休日日付の一意識別子

@@ -1,0 +1,29 @@
+##### ユーザー #####
+# ユーザ認証
+/auth:
+  $ref: ./user/auth.yaml
+
+# ユーザ取得/登録
+/user:
+  $ref: ./user/user.yaml
+
+# ユーザ取得/変更/削除
+/user/{userId}:
+  $ref: ./user/user-id.yaml
+
+##### プロジェクト管理 #####
+# カレンダーの休日取得/登録/変更
+/holiday:
+  $ref: ./project/holiday.yaml
+
+# カレンダーの休日削除
+/holiday/{holidayDate}:
+  $ref: ./project/holiday-id.yaml
+
+# プロジェクト取得/登録
+/project:
+  $ref: ./project/project.yaml
+
+# プロジェクト取得/変更
+/project/{projectId}:
+  $ref: ./project/project-id.yaml

@@ -1,0 +1,35 @@
+openapi: "3.0.0"
+
+#### 基本情報 #####
+info:
+  version: 1.0.0
+  title: OpenAPI勉強会
+  description: OpenAPI勉強会である。
+  license:
+    name: ライセンス
+
+#### アプリケーションコンテキストパス一覧 #####
+paths:
+  $ref: ./paths/index.yaml
+
+#### 主要コンポーネント一覧 #####
+components:
+  $ref: ./components/index.yaml
+
+#### WebAPI共通セキュリティ #####
+security:
+  - Bearer: []
+
+#### アプリケーションサーバ一覧 #####
+servers:
+  - url: http://localhost:8003
+    description: Local server(mock)
+  - url: https://xxx/api
+    description: Staging server
+
+#### アプリケーションタグ一覧 #####
+tags:
+  - name: user
+    description: ユーザー
+  - name: project
+    description: プロジェクト管理

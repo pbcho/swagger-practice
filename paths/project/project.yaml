@@ -1,0 +1,33 @@
+get:
+  summary: プロジェクト情報を全件取得
+  description: プロジェクト検索
+  tags:
+    - project
+  responses:
+    '200':
+      description: "プロジェクト情報を配列にして、JSONで返す"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProjectItems"
+    '401':
+      $ref: '#/components/responses/Unauthorized'
+
+post:
+  summary: プロジェクト情報を１件登録
+  description: プロジェクト登録。
+  tags:
+    - project
+  requestBody:
+    $ref: "#/components/requestBodies/createProject"
+  responses:
+    '201':
+      description: "プロジェクト登録情報をJSONで返す"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Project"
+    '400':
+      $ref: '#/components/responses/BadRequest'
+    '401':
+      $ref: '#/components/responses/Unauthorized'

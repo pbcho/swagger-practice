@@ -1,0 +1,29 @@
+# 400
+BadRequest:
+  description: The specified resource was invalid
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/BadRequestError"
+# 401
+NotFound:
+  description: The specified resource was not found
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/NotFoundError"
+
+# 404
+Unauthorized:
+  description: Unauthorized request
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/UnauthorizedError"
+# 500
+InternalServerError:
+  description: Unauthorized request
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/InternalServerError"

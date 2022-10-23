@@ -1,0 +1,25 @@
+# request parameters.
+# GET, PUT, DELETE...
+parameters:
+  $ref: ./parameters.yaml
+
+# request body.
+# POST...
+requestBodies:
+  $ref: ./requestBodies.yaml
+
+# request/response Object(JSON).
+schemas:
+  $ref: ./schemas.yaml
+
+# error object.
+responses:
+  $ref: ./responses.yaml
+
+# response headers.
+headers:
+  $ref: ./headers.yaml
+
+# securiry
+securitySchemes:
+  $ref: ./security-schemes.yaml

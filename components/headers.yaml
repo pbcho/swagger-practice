@@ -1,0 +1,5 @@
+X-Request-ID:
+  description: リクエストID
+  schema:
+    type: string
+    format: uuid

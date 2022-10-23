@@ -1,0 +1,54 @@
+get:
+  summary: カレンダーの休日を全件取得
+  description: カレンダーの休日を検索
+  tags:
+    - project
+  responses:
+    '200':
+      description: "カレンダーを配列にして、JSONで返す"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HolidayItems"
+    '401':
+      $ref: '#/components/responses/Unauthorized'
+
+post:
+  summary: カレンダー休日を複数件登録
+  description: カレンダーの休日複数件登録
+  tags:
+    - project
+  requestBody:
+    $ref: "#/components/requestBodies/createHoliday"
+  responses:
+    '201':
+      description: "カレンダーをJSONで返す"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Holiday"
+    '400':
+      $ref: '#/components/responses/BadRequest'
+    '401':
+      $ref: '#/components/responses/Unauthorized'
+
+put:
+  summary: カレンダー休日を複数件更新
+  description: カレンダー休日を複数件更新
+  tags:
+    - project
+  parameters:
+
+  requestBody:
+    $ref: "#/components/requestBodies/updateHoliday"
+  responses:
+    '204':
+      description: "OK"
+    '400':
+      $ref: '#/components/responses/BadRequest'
+    '401':
+      $ref: '#/components/responses/NotFound'
+    '404':
+      $ref: '#/components/responses/Unauthorized'

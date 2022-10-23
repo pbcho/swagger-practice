@@ -1,0 +1,61 @@
+##### user #####
+loginUserId:
+  description: "アクセストークン取得 Request Body"
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/AuthUserIdReq"
+
+createUser:
+  description: "ユーザ作成 Request Body"
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/UserReq"
+
+updateUser:
+  description: "ユーザ更新 Request Body"
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/UserPut"
+
+##### project #####
+createProject:
+  description: "プロジェクト作成 Request Body"
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ProjectReq"
+
+updateProject:
+  description: "プロジェクト変更 Request Body"
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ProjectPutReq"
+
+createHoliday:
+  description: "カレンダーの休日作成 Request Body"
+  required: true
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/HolidayReq"
+
+updateHoliday:
+  description: "カレンダーの休日更新 Request Body"
+  required: true
+  content:
+    application/json:
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/HolidayPutReq"

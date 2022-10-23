@@ -1,0 +1,52 @@
+get:
+  summary: ユーザー情報を１件取得
+  description: ユーザー情報を検索
+  tags:
+    - user
+  parameters:
+    - $ref: "#/components/parameters/userId"
+  responses:
+    "200":
+      description: "ユーザー情報を1件、JSONで返す"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+    "401":
+      $ref: "#/components/responses/Unauthorized"
+    "404":
+      $ref: "#/components/responses/NotFound"
+
+put:
+  summary: ユーザー情報を１件更新
+  description: ユーザー情報を更新
+  tags:
+    - user
+  parameters:
+    - $ref: "#/components/parameters/userId"
+  requestBody:
+    $ref: "#/components/requestBodies/updateUser"
+  responses:
+    "204":
+      description: "OK"
+    "400":
+      $ref: "#/components/responses/BadRequest"
+    "401":
+      $ref: "#/components/responses/Unauthorized"
+    "404":
+      $ref: "#/components/responses/NotFound"
+
+delete:
+  summary: ユーザー情報を１件削除
+  description: ユーザー情報を削除
+  tags:
+    - user
+  parameters:
+    - $ref: "#/components/parameters/userId"
+  responses:
+    "204":
+      description: OK
+    "401":
+      $ref: "#/components/responses/Unauthorized"
+    "404":
+      $ref: "#/components/responses/NotFound"
