@@ -39,8 +39,6 @@ put:
   description: カレンダー休日を複数件更新
   tags:
     - project
-  parameters:
-
   requestBody:
     $ref: "#/components/requestBodies/updateHoliday"
   responses:

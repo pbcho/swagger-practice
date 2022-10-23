@@ -149,7 +149,6 @@ paths:
       description: カレンダー休日を複数件更新
       tags:
         - project
-      parameters: null
       requestBody:
         $ref: '#/components/requestBodies/updateHoliday'
       responses:
