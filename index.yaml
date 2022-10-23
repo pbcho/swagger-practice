@@ -5,8 +5,6 @@ info:
   version: 1.0.0
   title: OpenAPI勉強会
   description: OpenAPI勉強会である。
-  license:
-    name: ライセンス
 
 #### アプリケーションコンテキストパス一覧 #####
 paths:
