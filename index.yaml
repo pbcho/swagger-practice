@@ -31,3 +31,11 @@ tags:
     description: ユーザー
   - name: project
     description: プロジェクト管理
+    externalDocs:
+      description: "外部リンク"
+      url: "https://swagger.io/"
+
+#### 外部リンク #####
+externalDocs:
+  description: "OpenAPI Specification"
+  url: "https://swagger.io/specification/"
